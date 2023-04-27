@@ -120,6 +120,7 @@ func (arc *AlertRuleContext) Eval() {
 		logger.Debugf("rule_eval:%s promql:%s, value:%v", arc.Key(), promql, value)
 	}
 	logger.Info("HandleVectors", value.String())
+	logger.Info("valueToVectors", conv.ConvertVectors(value))
 	arc.HandleVectors(conv.ConvertVectors(value), "inner")
 }
 
