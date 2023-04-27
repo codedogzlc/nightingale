@@ -19,6 +19,7 @@ func loopConsume(ctx context.Context) {
 	duration := time.Duration(100) * time.Millisecond
 	for {
 		events := EventQueue.PopBackBy(100)
+		logger.Info("events len", len(events))
 		if len(events) == 0 {
 			time.Sleep(duration)
 			continue

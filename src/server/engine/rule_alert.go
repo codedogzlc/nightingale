@@ -119,6 +119,7 @@ func (arc *AlertRuleContext) Eval() {
 		}
 		logger.Debugf("rule_eval:%s promql:%s, value:%v", arc.Key(), promql, value)
 	}
+	logger.Info("HandleVectors", value.String())
 	arc.HandleVectors(conv.ConvertVectors(value), "inner")
 }
 
@@ -141,6 +142,7 @@ func (arc *AlertRuleContext) HandleVectors(vectors []conv.Vector, from string) {
 		if IsMuted(cachedRule, event) {
 			continue
 		}
+		logger.Info("Do handleEvent ", event.RuleName)
 		arc.handleEvent(event)
 	}
 
@@ -218,6 +220,7 @@ func (arc *AlertRuleContext) handleEvent(event *models.AlertCurEvent) {
 }
 
 func (arc *AlertRuleContext) fireEvent(event *models.AlertCurEvent) {
+	logger.Info("fireEvent", event.RuleName)
 	// As arc.rule maybe outdated, use rule from cache
 	cachedRule := arc.RuleFromCache()
 	if cachedRule == nil {
@@ -257,6 +260,7 @@ func (arc *AlertRuleContext) fireEvent(event *models.AlertCurEvent) {
 }
 
 func (arc *AlertRuleContext) pushEventToQueue(event *models.AlertCurEvent) {
+	logger.Info("pushEventToQueue", event.RuleName)
 	if !event.IsRecovered {
 		event.LastSentTime = event.LastEvalTime
 		arc.fires.Set(event.Hash, event)
