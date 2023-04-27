@@ -21,8 +21,9 @@ var AlertMuteStrategies = []MuteStrategyFunc{
 }
 
 func IsMuted(rule *models.AlertRule, event *models.AlertCurEvent) bool {
-	for _, strategyFunc := range AlertMuteStrategies {
+	for i, strategyFunc := range AlertMuteStrategies {
 		if strategyFunc(rule, event) {
+			logger.Info("报警muted ", i, event.RuleName)
 			return true
 		}
 	}
