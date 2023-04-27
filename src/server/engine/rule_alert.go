@@ -140,6 +140,7 @@ func (arc *AlertRuleContext) HandleVectors(vectors []conv.Vector, from string) {
 		event := alertVector.BuildEvent(now)
 		// 如果event被mute了,本质也是fire的状态,这里无论如何都添加到alertingKeys中,防止fire的事件自动恢复了
 		alertingKeys[alertVector.Hash()] = struct{}{}
+		logger.Info("IsMuted(cachedRule, event)", IsMuted(cachedRule, event), vector)
 		if IsMuted(cachedRule, event) {
 			continue
 		}
