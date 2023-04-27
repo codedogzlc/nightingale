@@ -55,6 +55,7 @@ func reloadTpls() error {
 // event: 告警/恢复事件
 // isSubscribe: 告警事件是否由subscribe的配置产生
 func HandleEventNotify(event *models.AlertCurEvent, isSubscribe bool) {
+	logger.Info("handle log notify", event.RuleName)
 	rule := memsto.AlertRuleCache.Get(event.RuleId)
 	if rule == nil {
 		return

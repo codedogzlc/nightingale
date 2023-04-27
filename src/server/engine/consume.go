@@ -37,6 +37,7 @@ func consume(events []interface{}, sema *semaphore.Semaphore) {
 		sema.Acquire()
 		go func(event *models.AlertCurEvent) {
 			defer sema.Release()
+			logger.Info("Do eventConsume ", event.RuleName)
 			consumeOne(event)
 		}(event)
 	}
