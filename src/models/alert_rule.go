@@ -31,9 +31,9 @@ type AlertRule struct {
 	PromQl               string      `json:"prom_ql"`                      // just one ql
 	PromEvalInterval     int         `json:"prom_eval_interval"`           // unit:s
 	EnableStime          string      `json:"-"`                            // split by space: "00:00 10:00 12:00"
-	EnableStimeJSON      []string    `json:"enable_stime" gorm:"-"`        // for fe
+	EnableStimeJSON      []string    `json:"enable_stimes" gorm:"-"`       // for fe
 	EnableEtime          string      `json:"-"`                            // split by space: "00:00 10:00 12:00"
-	EnableEtimeJSON      []string    `json:"enable_etime" gorm:"-"`        // for fe
+	EnableEtimeJSON      []string    `json:"enable_etimes" gorm:"-"`       // for fe
 	EnableDaysOfWeek     string      `json:"-"`                            // eg: "0 1 2 3 4 5 6 ; 0 1 2"
 	EnableDaysOfWeekJSON [][]string  `json:"enable_days_of_week" gorm:"-"` // for fe
 	EnableInBG           int         `json:"enable_in_bg"`                 // 0: global 1: enable one busi-group
