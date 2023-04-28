@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/toolkits/pkg/logger"
 	"net/http"
 	"strings"
 	"time"
@@ -147,7 +148,7 @@ func alertRuleDelByService(c *gin.Context) {
 func alertRulePutByFE(c *gin.Context) {
 	var f models.AlertRule
 	ginx.BindJSON(c, &f)
-
+	logger.Info("alertRulePutByFE,", f)
 	arid := ginx.UrlParamInt64(c, "arid")
 	ar, err := models.AlertRuleGetById(arid)
 	ginx.Dangerous(err)
